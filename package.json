@@ -1,0 +1,25 @@
+{
+  "name": "kittiefight-yiled-farming",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "ganache": "ganache-cli --port 8544 --gasPrice 1000000000 -a 50 --gasLimit 7992148 --networkId 999 -e 100000"
+  },
+  "author": "nedodn",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/cli": "^2.8.2",
+    "@openzeppelin/contracts-ethereum-package": "2.5.0",
+    "@openzeppelin/upgrades": "^2.8.0",
+    "dotenv": "^8.2.0",
+    "ganache-cli": "^6.1.3",
+    "truffle-hdwallet-provider": "^1.0.13",
+    "web3": "^1.0.0-beta.55",
+    "eth-gas-reporter": "0.2.17",
+    "truffle-contract-size": "^2.0.0"
+  }
+}

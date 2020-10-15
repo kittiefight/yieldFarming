@@ -1,0 +1,16 @@
+logs
+npm-debug.log*
+package-lock.json
+yarn.lock
+
+coverage/
+coverage.json
+
+node_modules/
+
+build/
+
+.npm
+.env
+
+.openzeppelin/.session
