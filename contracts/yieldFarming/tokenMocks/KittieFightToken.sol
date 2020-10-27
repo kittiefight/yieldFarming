@@ -17,6 +17,10 @@ contract KittieFightToken is ERC20Basic, ERC20Advanced {
     emit Transfer(address(0), msg.sender, supply);
   }
 
+  function name() external pure returns (string memory) {return "KittieFightToken";}
+  function symbol() external pure returns (string memory) {return "KTY";}
+  function decimals() external pure returns (uint8) {return 18;}
+
   /**
   * @dev Total number of tokens in existence
   */
