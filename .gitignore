@@ -13,4 +13,8 @@ build/
 .npm
 .env
 
+.openzeppelin/.lock
 .openzeppelin/.session
+
+# MacOS junk
+.DS_Store
