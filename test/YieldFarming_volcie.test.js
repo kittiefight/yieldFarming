@@ -1298,8 +1298,8 @@ contract("YieldFarming", accounts => {
     console.log("Total Deposited LPs in Dai value:", weiToEther(totalDepositsInDai))
   })
 
-  it("transfers leftover rewards to a new address", async () => {
-    let advancement = 90 * 24 * 60 * 60;
+  it("All tokens rewards are distributed to all qualified investors", async () => {
+    let advancement = 50 * 24 * 60 * 60;
     await advanceTimeAndBlock(advancement);
 
     let KTY_bal = await kittieFightToken.balanceOf(yieldFarming.address);
@@ -1313,4 +1313,16 @@ contract("YieldFarming", accounts => {
       weiToEther(SDAO_bal)
     );
   });
+
+  it("Owner can only transfer any token to a new address after two months before the program", async () => {
+    let token = new BigNumber(
+      web3.utils.toWei("500", "ether") 
+    );
+
+    await kittieFightToken.transfer(yieldFarming.address, token).should.be.fulfilled;
+    await yieldFarming.returnTokens(kittieFightToken.address, token, accounts[0]).should.be.rejected;
+    let advancement = 30 * 24 * 60 * 60;
+    await advanceTimeAndBlock(advancement);
+    await yieldFarming.returnTokens(kittieFightToken.address, token, accounts[0]).should.be.fulfilled;
+  })
 });

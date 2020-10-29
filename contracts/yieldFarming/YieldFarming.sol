@@ -348,6 +348,7 @@ contract YieldFarming is Ownable {
      * @dev This function can only be carreid out by the owner of this contract.
      */
     function returnTokens(address _token, uint256 _amount, address _newAddress) external onlyOwner {
+        require(block.timestamp > programEndAt.add(MONTH.mul(2)), "Owner can only return tokens after two months after program ends");
         uint256 balance = IERC20(_token).balanceOf(address(this));
         require(_amount <= balance, "Exceeds balance");
         require(IERC20(_token).transfer(_newAddress, _amount), "Fail to transfer tokens");
