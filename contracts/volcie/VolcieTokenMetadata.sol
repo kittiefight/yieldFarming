@@ -1,9 +1,9 @@
 pragma solidity ^0.5.5;
 
-import "../libs/openzeppelin_v2_5_0/GSN/Context.sol";
-import "../libs/openzeppelin_v2_5_0/token/ERC721/ERC721.sol";
-import "../libs/openzeppelin_v2_5_0/token/ERC721/IERC721Metadata.sol";
-import "../libs/openzeppelin_v2_5_0/introspection/ERC165.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC721/IERC721Metadata.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/introspection/ERC165.sol";
 import "../libs/StringUtils.sol";
 
 /**

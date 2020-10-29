@@ -1,10 +1,10 @@
 pragma solidity ^0.5.5;
 
-import "../libs/openzeppelin_upgradable_v2_5_0/ownership/Ownable.sol";
-import "../libs/openzeppelin_upgradable_v2_5_0/math/SafeMath.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/ownership/Ownable.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+import '../interfaces/IVolcieToken.sol';
 import './YieldFarming.sol';
 import './YieldFarmingHelper.sol';
-import '../interfaces/IVolcieToken.sol';
 
 contract YieldsCalculator is Ownable {
     using SafeMath for uint256;

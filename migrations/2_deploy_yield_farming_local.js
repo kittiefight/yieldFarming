@@ -69,30 +69,31 @@ module.exports = (deployer, network, accounts) => {
   deployer
     .deploy(YieldFarming)
     .then(() => deployer.deploy(Volcie))
-    .then(() => deployer.deploy(SuperDaoToken, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(KittieFightToken, ERC20_TOKEN_SUPPLY))
+    .then(() => deployer.deploy(SuperDaoToken))
+    .then(() => deployer.deploy(KittieFightToken))
     .then(() => deployer.deploy(WETH))
     .then(() => deployer.deploy(Factory, accounts[0]))
     .then(() => deployer.deploy(YieldFarmingHelper))
     .then(() => deployer.deploy(YieldsCalculator))
-    .then(() => deployer.deploy(Dai, 1))
-    .then(() => deployer.deploy(ANT, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(YDAI, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(YYFI, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(YYCRV, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(YALINK, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(ALEND, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(ASNX, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(GNO, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(_2KEY, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(YETH, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(AYFI, ERC20_TOKEN_SUPPLY))
-    .then(() => deployer.deploy(UNI, ERC20_TOKEN_SUPPLY))
+    .then(() => deployer.deploy(Dai))
+    .then(() => deployer.deploy(ANT))
+    .then(() => deployer.deploy(YDAI))
+    .then(() => deployer.deploy(YYFI))
+    .then(() => deployer.deploy(YYCRV))
+    .then(() => deployer.deploy(YALINK))
+    .then(() => deployer.deploy(ALEND))
+    .then(() => deployer.deploy(ASNX))
+    .then(() => deployer.deploy(GNO))
+    .then(() => deployer.deploy(_2KEY))
+    .then(() => deployer.deploy(YETH))
+    .then(() => deployer.deploy(AYFI))
+    .then(() => deployer.deploy(UNI))
     .then(async () => {
       console.log("\nGetting contract instances...");
 
       // Volcie Token
       volcie = await Volcie.deployed();
+      await volcie.initialize(accounts[0]);
 
       // YieldFarming
       yieldFarming = await YieldFarming.deployed();
@@ -100,9 +101,13 @@ module.exports = (deployer, network, accounts) => {
 
       // TOKENS
       superDaoToken = await SuperDaoToken.deployed();
-      console.log(superDaoToken.address);
+      await superDaoToken.initialize("SuperDao", "SDAO", 18);
+      await superDaoToken.mint(ERC20_TOKEN_SUPPLY);
+      console.log('SDAO:', superDaoToken.address);
       kittieFightToken = await KittieFightToken.deployed();
-      console.log(kittieFightToken.address);
+      await kittieFightToken.initialize("KittieFightToken", "KTY", 18);
+      await kittieFightToken.mint(ERC20_TOKEN_SUPPLY);
+      console.log('KTY:',kittieFightToken.address);
       //kittieFightToken = await KittieFightToken.at(KTY_ADDRESS);
       //console.log(kittieFightToken.address)
 
@@ -112,30 +117,56 @@ module.exports = (deployer, network, accounts) => {
       factory = await Factory.deployed();
       console.log("factory:", factory.address);
       dai = await Dai.deployed();
+      await dai.initialize("Dai Stablecoin", "DAI", 18);
+      await dai.mint(1);
       console.log("DAI:", dai.address);
       ant = await ANT.deployed();
+      await ant.initialize("Aragon", "ANT", 18);
+      await ant.mint(ERC20_TOKEN_SUPPLY);
       console.log("ANT:", ant.address)
       yDAI = await YDAI.deployed();
+      await yDAI.initialize("iearn DAI", "yDAI", 18);
+      await yDAI.mint(ERC20_TOKEN_SUPPLY);
       console.log("yDAI:", yDAI.address);
       yYFI = await YYFI.deployed();
+      await yYFI.initialize("iearn iearn.finance", "yYFI", 18);
+      await yYFI.mint(ERC20_TOKEN_SUPPLY);
       console.log("yYFI:", yYFI.address);
       yyCRV = await YYCRV.deployed();
+      await yyCRV.initialize("iearn Curve DAO Token", "yCRV", 18);
+      await yyCRV.mint(ERC20_TOKEN_SUPPLY);
       console.log("yyCRV:", yyCRV.address)
       yaLINK = await YALINK.deployed()
+      await yaLINK.initialize("Aave Interest bearing LINK", "aLINK", 18);
+      await yaLINK.mint(ERC20_TOKEN_SUPPLY);
       console.log("yaLINK:", yaLINK.address)
       aLend = await ALEND.deployed()
+      await aLend.initialize("Aave Interest bearing LEND", "aLEND", 18);
+      await aLend.mint(ERC20_TOKEN_SUPPLY);
       console.log("aLEND:", aLend.address)
       aSNX = await ASNX.deployed()
+      await aSNX.initialize("Aave Interest bearing", "aSNX", 18);
+      await aSNX.mint(ERC20_TOKEN_SUPPLY);
       console.log("aSNX:", aSNX.address)
       gno = await GNO.deployed()
+      await gno.initialize("Gnosis", "GNO", 18);
+      await gno.mint(ERC20_TOKEN_SUPPLY);
       console.log("GNO:", gno.address)
       _2key = await _2KEY.deployed()
+      await _2key.initialize("TwoKeyEconomy", "2Key", 18);
+      await _2key.mint(ERC20_TOKEN_SUPPLY);
       console.log("2Key:", _2key.address)
       yETH = await YETH.deployed()
+      await yETH.initialize("iearn ETH", "yETH", 18);
+      await yETH.mint(ERC20_TOKEN_SUPPLY);
       console.log("yETH:", yETH.address)
       aYFI = await AYFI.deployed()
+      await aYFI.initialize("yearn.finance", "YFI", 18);
+      await aYFI.mint(ERC20_TOKEN_SUPPLY);
       console.log("aYFI:", aYFI.address)
       uni = await UNI.deployed()
+      await uni.initialize("Uniswap", "UNI", 18);
+      await uni.mint(ERC20_TOKEN_SUPPLY);
       console.log("UNI:", uni.address)
 
       await factory.createPair(weth.address, kittieFightToken.address);

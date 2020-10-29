@@ -1,14 +1,15 @@
 pragma solidity ^0.5.5;
 
-import "../libs/openzeppelin_v2_5_0/token/ERC721/ERC721.sol";
-import "../libs/openzeppelin_v2_5_0/token/ERC721/ERC721Enumerable.sol";
-import "../libs/openzeppelin_v2_5_0/token/ERC721/ERC721Pausable.sol";
-import "../libs/openzeppelin_v2_5_0/access/roles/MinterRole.sol";
-import "../libs/openzeppelin_v2_5_0/math/SafeMath.sol";
-import "../libs/openzeppelin_v2_5_0/drafts/Counters.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Detailed.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC721/ERC721Enumerable.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC721/ERC721Pausable.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/access/roles/MinterRole.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/drafts/Counters.sol";
+import '../libs/uniswap/IUniswapV2Pair.sol';
 import "../libs/StringUtils.sol";
-import '../uniswapKTY/uniswap-v2-core/interfaces/IUniswapV2Pair.sol';
-import "../uniswapKTY/uniswap-v2-core/interfaces/IERC20.sol";
 import "./VolcieTokenMetadata.sol";
 
 contract VolcieToken is ERC721, ERC721Enumerable, ERC721Pausable, VolcieTokenMetadata, MinterRole {
@@ -89,8 +90,8 @@ contract VolcieToken is ERC721, ERC721Enumerable, ERC721Pausable, VolcieTokenMet
     }
 
     function getPairName(IUniswapV2Pair pair) internal view returns(string memory) {
-        string memory token0n = IERC20(pair.token0()).symbol();
-        string memory token1n = IERC20(pair.token1()).symbol();
+        string memory token0n = ERC20Detailed(pair.token0()).symbol();
+        string memory token1n = ERC20Detailed(pair.token1()).symbol();
         if(keccak256(bytes(token1n)) == KTY_NAME_HASH){
             (token1n, token0n) = (token0n, token1n);
         }
