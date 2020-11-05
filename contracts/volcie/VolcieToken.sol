@@ -34,6 +34,7 @@ contract VolcieToken is ERC721, ERC721Enumerable, ERC721Pausable, VolcieTokenMet
     mapping (uint256 => TokenProperties) public properties;
 
     constructor() VolcieTokenMetadata(NAME, SYMBOL) public {
+		MinterRole.initialize(_msgSender());
         _setBaseURI(BASE_URI);
         nextTokenId.increment();    // First token should have tokenId = 1;
     }
