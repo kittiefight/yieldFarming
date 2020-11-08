@@ -25,7 +25,7 @@ module.exports = {
       provider: providerFactory("mainnet"),
       network_id: 1,
       gas: 9000000,
-      gasPrice: 100000000000 // 100 Gwei, Change this value according to price average of the deployment time
+      gasPrice: 25000000000 // 100 Gwei, Change this value according to price average of the deployment time
     },
     rinkeby: {
       provider: providerFactory("rinkeby"),
